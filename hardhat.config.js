@@ -1,5 +1,6 @@
 require("dotenv").config();
 require("@nomiclabs/hardhat-etherscan");
+require("@nomiclabs/hardhat-ethers");
 require("@nomiclabs/hardhat-waffle");
 require("hardhat-gas-reporter");
 require("solidity-coverage");
@@ -12,63 +13,106 @@ const SEPOLIA_RPC_URL = process.env.SEPOLIA_RPC_URL;
 
 
 module.exports = {
-    solidity: {
-        compilers: [
-            {
-                version: "0.8.9",
-            },
-            {
-                version: "0.8.4",
-            },
-            {
-                version: "0.8.0",
-            },
-            {
-                version: "0.4.19",
-            },
-            {
-                version: "0.6.12",
-            },
-            {
-                version: "0.6.0",
-            },
-        ],
-    },
-    defaultNetwork: "hardhat",
-    networks: {
-        hardhat: {
-            chainId: 31337,
-            blockConfirmations: 1,
-        },
-        localhost: {
-            chainId: 31337,
-            blockConfirmations: 1,
-        },
+  solidity: {
+    compilers: [
+      {
+        version: "0.8.9",
 
-        goerli: {
-            url: GOERLI_RPC_URL,
-            accounts: [PRIVATE_KEY],
-            chainId: 5,
-            blockConfirmations: 6,
+        settings: {
+          optimizer: {
+            enabled: true,
+            runs: 1000,
+          },
         },
-        sepolia: {
-            url: SEPOLIA_RPC_URL,
-            accounts: [PRIVATE_KEY],
-            chainId: 11155111,
-            blockConfirmations: 6,
+      },
+      {
+        version: "0.8.4",
+
+        settings: {
+          optimizer: {
+            enabled: true,
+            runs: 1000,
+          },
         },
+      },
+      {
+        version: "0.8.0",
+
+        settings: {
+          optimizer: {
+            enabled: true,
+            runs: 1000,
+          },
+        },
+      },
+      {
+        version: "0.4.19",
+
+        settings: {
+          optimizer: {
+            enabled: true,
+            runs: 1000,
+          },
+        },
+      },
+      {
+        version: "0.6.12",
+
+        settings: {
+          optimizer: {
+            enabled: true,
+            runs: 1000,
+          },
+        },
+      },
+      {
+        version: "0.6.0",
+
+        settings: {
+          optimizer: {
+            enabled: true,
+            runs: 1000,
+          },
+        },
+      },
+    ],
+  },
+  allowUnlimitedContractSize: true,
+  defaultNetwork: "hardhat",
+  networks: {
+    hardhat: {
+      chainId: 31337,
+      blockConfirmations: 1,
+    },
+    localhost: {
+      chainId: 31337,
+      blockConfirmations: 1,
     },
 
-    namedAccounts: {
-        deployer: {
-            default: 0,
-        },
-        user: {
-            default: 1
-        }
+    goerli: {
+      url: GOERLI_RPC_URL,
+      accounts: [PRIVATE_KEY],
+      chainId: 5,
+      blockConfirmations: 6,
     },
-    etherscan: {
-        apiKey: ETHERSCAN_API,
+    sepolia: {
+      url: SEPOLIA_RPC_URL,
+      accounts: [PRIVATE_KEY],
+      chainId: 11155111,
+      blockConfirmations: 6,
     },
-}
+  },
+
+  namedAccounts: {
+    deployer: {
+      default: 0,
+    },
+    user: {
+      default: 1,
+    },
+  },
+  etherscan: {
+    apiKey: ETHERSCAN_API,
+  },
+};
 
